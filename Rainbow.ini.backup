@@ -1,0 +1,10 @@
+[Main]
+SYSTFILE = Rainbow
+DBSERVER = localhost
+DBUSERVER = localhost
+DBDATABASE = riza_db
+DBUDATABASE = riza_sys_data
+DBUSER = developer
+DBPASS = developer
+DBPAYROLL = payroll
+[Temp]
