@@ -1,0 +1,9 @@
+{
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.28",
+        "phpoffice/phpword": "^1.0"
+    },
+    "config": {
+        "platform-check": false
+    }
+}
