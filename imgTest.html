@@ -1,0 +1,72 @@
+<html>
+<head>
+  <title>Aviary Image Upload Demo</title>
+<!--  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="http://feather.aviary.com/js/feather.js"></script>
+-->
+  <script type="text/javascript" src="img_edit/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="img_edit/feather.js"></script>
+  <script type="text/javascript" >  
+    /* edit Images using aviray */
+    var featherEditor = new Aviary.Feather({
+        apiKey: '', // your api key , you can get one from http://developers.aviary.com/
+        apiVersion: 3, // the api version . 3 is the last one so far
+        theme: 'dark', // there are 'light' and 'dark' themes
+        tools: 'all', // you can specify the tools from here, you can include/exclude what ever you want
+        appendTo: '',
+        onSave: function(imageID, newURL) {
+            var img = document.getElementById(imageID);
+            img.src = newURL; // after save, replacs the image with the new one from aviary.com
+            featherEditor.close();
+        },
+        onError: function(errorObj) { 
+            alert(errorObj.message);
+        }
+    });
+    /* after upload call read image function*/
+    $(document).on('change', '#Image', function() {
+       // readImage(this);
+       if (this.files && this.files[0]) {
+            var reader = new FileReader();    
+            reader.onload = function (e) {
+                launchEditor('ImagePreview', e.target.result)
+                $('#ImagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);                           
+        }
+    });                   
+    function launchEditor(id, src) {
+        featherEditor.launch({
+            image: id,
+            url: src
+        });
+       return false;
+    }
+    $(document).on('click', '#editImagePreview', function() {
+         var url =$('#ImagePreview').attr("src");
+         return launchEditor('ImagePreview', url);
+    });       
+  </script>
+</head>
+<body>
+  <fieldset>
+     <form action="#" method="post"  enctype="multipart/form-data">
+        <div class="widget">
+           <div class="well">
+              <div class="controls controls-width span12"  >
+                 <label class="control-label"><b>Upload your image:</b></label>
+                 <input type="file" id="Image">
+                 <div class="imageupload">
+                    <div id="photo">
+                       <img width="300px;" id="ImagePreview" src="http://asara.me/Aviary-Example/preview.jpg" alt="your image"/>
+                    </div>
+                    <button  type="button" class="black-add-button" id="editImagePreview"> Edit!
+                    </button> 
+                 </div>
+              </div>
+           </div>
+        </div>     
+     </form>
+  </fieldset>
+</body>
+</html>
